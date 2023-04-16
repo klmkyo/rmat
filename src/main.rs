@@ -1,6 +1,6 @@
 use graph::{Propabilities, Graph};
 use clap::Parser;
-use std::time::Instant;
+
 
 mod graph;
 

@@ -1,6 +1,6 @@
 use std::{fmt::{Debug, Formatter}, ops::Deref, fs::File, io::Write, str::FromStr};
 use colored::Colorize;
-use fastrand;
+
 
 // 4 f64's in an array
 pub struct Propabilities([f64; 4]);
@@ -174,7 +174,7 @@ impl Graph {
 			// self.print();
 
             // select the quarter
-            // a: top left, b: top right, c: bottom left, d: bottom right
+            // a (0): top left, b (1): top right, c (2): bottom left, d (3): bottom right
             let mut quarter = self.propabilities.get_random_quarter();
 
 			// if the graph is undirected, the b and c quarters are the same
@@ -275,7 +275,7 @@ impl Graph {
 					} else if self.connections[i][j] {
 						print!("{} ", (self.connections[i][j] as u8).to_string().red());
 					} else {
-						print!("{} ", (self.connections[i][j] as u8).to_string());
+						print!("{} ", (self.connections[i][j] as u8));
 					}
 
 				}
@@ -290,7 +290,7 @@ impl Graph {
 					} else if self.connections[i][j] {
 						print!("{} ", (self.connections[i][j] as u8).to_string().red());
 					} else {
-						print!("{} ", (self.connections[i][j] as u8).to_string());
+						print!("{} ", (self.connections[i][j] as u8));
 					}
 
 				}
@@ -310,7 +310,7 @@ impl Graph {
         let vertices = self.connections.len();
         // calculate the density
         let mut density = {
-            let mut vertices = vertices as f64;
+            let vertices = vertices as f64;
             if self.self_connections_allowed {
                 // if self connections are allowed, divide by vertices * vertices
                 if self.directed {
@@ -406,7 +406,7 @@ impl ToString for Graph {
 					string.push_str("0 ");
 				}
 			}
-			string.push_str("\n");
+			string.push('\n');
 		}
 		string
 	}
